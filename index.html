@@ -13,7 +13,7 @@
 </script>
 
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
   <meta name="theme-color" content="#1a1a1a">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -28,14 +28,24 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
   <style>
     /* GENERAL STYLES & RESET */
+    *::-webkit-scrollbar, html::-webkit-scrollbar, body::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+      background: transparent !important;
+      -webkit-appearance: none !important;
+    }
     html, body {
       overscroll-behavior: none;
       -webkit-overflow-scrolling: auto;
       background-color: #1a1a1a;
       color: #ffffff;
       padding: 10px;
+      padding-top: calc(10px + env(safe-area-inset-top));
+      padding-bottom: env(safe-area-inset-bottom);
       margin: 0px;
       font-family: system-ui, -apple-system, sans-serif;
+      scrollbar-width: none; /* Firefox */
     }
     *, button, input {
       margin: 0;
@@ -442,10 +452,10 @@
     }
     /* SETTINGS MODAL */
     .settings-btn {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: none;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: none;
   border: none;
   font-size: 24px;
   cursor: pointer;
@@ -1407,7 +1417,7 @@
       window.addEventListener('load', function() {
         // Inline service worker code as a blob
         var swCode = `
-          const CACHE_NAME = 'tallycat-cache-v9';
+          const CACHE_NAME = 'tallycat-cache-v12';
           const urlsToCache = [
             './',
             'index.html',
